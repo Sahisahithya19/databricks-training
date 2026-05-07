@@ -57,3 +57,25 @@ WHERE hire_date >= '2021-03-01';
 --Q15
 SELECT * FROM Employee
 WHERE hire_date >= DATE_SUB(CURDATE(), INTERVAL 2 YEAR);
+
+--Q16
+SELECT SUM(salary) AS total_salary
+FROM Employee;
+
+--Q17
+SELECT AVG(salary) AS average_salary
+FROM Employee;
+
+--Q18
+SELECT MIN(salary) AS minimum_salary
+FROM Employee;
+
+--Q19
+SELECT department_id, COUNT(*) AS employee_count
+FROM Employee
+GROUP BY department_id;
+
+--Q20
+SELECT department_id, AVG(salary) AS average_salary
+FROM Employee
+GROUP BY department_id;
