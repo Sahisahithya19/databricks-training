@@ -1,0 +1,224 @@
+--JOINS
+
+Table 1: Departments
+
+CREATE TABLE Departments (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName VARCHAR(50),
+    Location VARCHAR(50)
+);
+
+INSERT INTO Departments VALUES
+(1,'HR','New York'),
+(2,'Finance','Chicago'),
+(3,'IT','Dallas'),
+(4,'Marketing','Boston'),
+(5,'Sales','Seattle'),
+(6,'Operations','Atlanta');
+
+Table 2: Employees
+
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    EmployeeName VARCHAR(50),
+    DepartmentID INT,
+    Salary DECIMAL(10,2),
+    ManagerID INT,
+    JoiningDate DATE
+);
+
+INSERT INTO Employees VALUES
+(101,'John',1,50000,NULL,'2020-01-15'),
+(102,'Emma',2,65000,101,'2021-03-10'),
+(103,'David',3,70000,101,'2019-07-22'),
+(104,'Sophia',3,72000,103,'2022-05-01'),
+(105,'Michael',5,55000,102,'2021-09-18'),
+(106,'Olivia',NULL,48000,102,'2023-01-12'),
+(107,'James',4,60000,103,'2022-10-20'),
+(108,'William',7,75000,101,'2020-08-11'),
+(109,'Ava',NULL,52000,NULL,'2024-02-15'),
+(110,'Isabella',5,68000,105,'2021-06-05');
+
+Table 3: Projects
+
+CREATE TABLE Projects (
+    ProjectID INT PRIMARY KEY,
+    ProjectName VARCHAR(50),
+    DepartmentID INT,
+    Budget DECIMAL(12,2)
+);
+
+INSERT INTO Projects VALUES
+(201,'Payroll System',1,150000),
+(202,'Audit System',2,200000),
+(203,'Website Redesign',4,100000),
+(204,'ERP Upgrade',3,500000),
+(205,'Sales Dashboard',5,175000),
+(206,'Automation',6,250000),
+(207,'AI Chatbot',8,300000);
+
+Table 4: EmployeeProjects
+
+CREATE TABLE EmployeeProjects (
+    EmployeeID INT,
+    ProjectID INT
+);
+
+INSERT INTO EmployeeProjects VALUES
+(101,201),
+(102,202),
+(103,204),
+(104,204),
+(105,205),
+(107,203),
+(110,205),
+(103,207),
+(108,207),
+(109,202);
+
+Table Relationships
+Departments
+--------------
+DepartmentID (PK)
+
+Employees
+--------------
+DepartmentID -> Departments
+
+Projects
+--------------
+DepartmentID -> Departments
+
+EmployeeProjects
+--------------
+EmployeeID -> Employees
+ProjectID -> Projects
+
+
+Set operators
+==============
+
+Table 1: CurrentEmployees
+
+CREATE TABLE CurrentEmployees (
+    EmployeeID INT PRIMARY KEY,
+    EmployeeName VARCHAR(50),
+    Department VARCHAR(50),
+    Salary DECIMAL(10,2)
+);
+
+Insert Values
+INSERT INTO CurrentEmployees VALUES
+(101,'John','HR',50000),
+(102,'Emma','Finance',65000),
+(103,'David','IT',70000),
+(104,'Sophia','IT',72000),
+(105,'Michael','Sales',55000),
+(106,'Olivia','Marketing',48000),
+(107,'James','Marketing',60000),
+(108,'William','IT',75000),
+(109,'Ava','Finance',52000),
+(110,'Isabella','Sales',68000);
+
+Table 2: FormerEmployees
+
+CREATE TABLE FormerEmployees (
+    EmployeeID INT PRIMARY KEY,
+    EmployeeName VARCHAR(50),
+    Department VARCHAR(50),
+    Salary DECIMAL(10,2)
+);
+
+Insert Values
+INSERT INTO FormerEmployees VALUES
+(105,'Michael','Sales',55000),
+(106,'Olivia','Marketing',48000),
+(111,'Lucas','HR',45000),
+(112,'Mia','Finance',62000),
+(113,'Ethan','IT',71000),
+(114,'Charlotte','Sales',53000),
+(115,'Benjamin','Operations',59000),
+(116,'Amelia','HR',51000),
+(117,'Henry','Finance',67000),
+(118,'Harper','IT',73000);
+
+Notice:
+
+Employees 105 and 106 appear in both tables.
+Other records are unique.
+
+Table 3: DomesticCustomers
+
+CREATE TABLE DomesticCustomers (
+    CustomerID INT PRIMARY KEY,
+    CustomerName VARCHAR(50),
+    City VARCHAR(50)
+);
+
+Insert Values
+
+INSERT INTO DomesticCustomers VALUES
+(1,'ABC Ltd','New York'),
+(2,'XYZ Corp','Chicago'),
+(3,'Global Tech','Dallas'),
+(4,'Sunrise Inc','Boston'),
+(5,'Bright Solutions','Seattle'),
+(6,'Alpha Systems','Miami');
+
+Table 4: InternationalCustomers
+
+CREATE TABLE InternationalCustomers (
+    CustomerID INT PRIMARY KEY,
+    CustomerName VARCHAR(50),
+    City VARCHAR(50)
+);
+
+Insert Values
+
+INSERT INTO InternationalCustomers VALUES
+(4,'Sunrise Inc','Boston'),
+(5,'Bright Solutions','Seattle'),
+(7,'TechWorld','London'),
+(8,'Future Corp','Toronto'),
+(9,'Vision Ltd','Dubai'),
+(10,'Skyline LLC','Sydney');
+
+Note:
+Customer IDs 4 and 5 exist in both tables.
+
+Table 5: OnlineOrders
+
+CREATE TABLE OnlineOrders (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT,
+    Amount DECIMAL(10,2)
+);
+
+Insert Values
+
+INSERT INTO OnlineOrders VALUES
+(1001,1,250),
+(1002,2,450),
+(1003,3,700),
+(1004,5,900),
+(1005,7,350),
+(1006,8,1200);
+
+Table 6: StoreOrders
+
+CREATE TABLE StoreOrders (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT,
+    Amount DECIMAL(10,2)
+);
+
+Insert Values
+
+INSERT INTO StoreOrders VALUES
+(1004,5,900),
+(1005,7,350),
+(1007,2,600),
+(1008,3,400),
+(1009,9,1100),
+(1010,10,850);
+
